@@ -7,6 +7,7 @@ button.onclick= function () {
     //capture endpoint result and store in variable
     
     //assign result to count variable and return count 
+    
     counter=counter+1;
     var span=getElementById('count');
     span.innerHTML=counter.toString();
