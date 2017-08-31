@@ -1,16 +1,31 @@
 //Counter code
 var button = document.getElementById('counter');
-var counter=0;
+
 button.onclick= function () {
-    //Make a request to counter endpoint
-    
+    //Create Request Object
+    var request = new XMLHttpRequest();
     //capture endpoint result and store in variable
-    
+     request.onreadystatechange = function() {
+         if (request.readystate == XMLHttpRequest.DONE)
+           {
+              // do something
+              if (request.status == 200)
+                {
+                    var counter = request.responseText;
+                     var span=document.getElementById('count');
+                    span.innerHTML=counter.toString();
+                }
+           }
+         //nothing
+     };
+     
     //assign result to count variable and return count 
     
-    counter=counter+1;
-    var span=document.getElementById('count');
-    span.innerHTML=counter.toString();
+    //Make a requst object
+    
+    request.open ('GET', 'http://srikensway.imad.hasura-app.io/counter',true);
+    request.send(null);
+   
     
 };
 
