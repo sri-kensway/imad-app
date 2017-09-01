@@ -111,6 +111,25 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+var pool = new Pool(config);
+app.get('/test-db', function(req,res){
+    
+    //send reqeust to select data
+    pool.query('select * from test', function (err,result){
+        if (err) {
+                 res.status(500).send(err.toSrting());        
+                }
+                else {
+                res.send(JSON.stringify(result));    
+                }
+        
+    });
+    // return response with results
+    
+});
+
+
+
 var names=[];
 app.get('/submit-name', function (req,res){
     // Get the name from the request
