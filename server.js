@@ -100,22 +100,7 @@ return htmlTemplate;
 }
 
 
-var pool = new Pool(config);
-app.get('/test-db', function(req,res){
-    
-    //send reqeust to select data
-    pool.query('select * from test', function (err,result){
-        if (err) {
-                 res.status(500).send(err.toSrting());        
-                }
-                else {
-                res.send(JSON.stringify(result));    
-                }
-        
-    });
-    // return response with results
-    
-});
+
 
 var counter=0;
 app.get('/counter',function (req,res){
