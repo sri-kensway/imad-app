@@ -99,6 +99,24 @@ return htmlTemplate;
 
 }
 
+
+var pool = new Pool(config);
+app.get('/test-db', function(req,res){
+    
+    //send reqeust to select data
+    pool.query('select * from test', function (err,result){
+        if (err) {
+                 res.status(500).send(err.toSrting());        
+                }
+                else {
+                res.send(JSON.stringify(result));    
+                }
+        
+    });
+    // return response with results
+    
+});
+
 var counter=0;
 app.get('/counter',function (req,res){
   counter=counter+1;
@@ -139,22 +157,7 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-var pool = new Pool(config);
-app.get('/test-db', function(req,res){
-    
-    //send reqeust to select data
-    pool.query('select * from test', function (err,result){
-        if (err) {
-                 res.status(500).send(err.toSrting());        
-                }
-                else {
-                res.send(JSON.stringify(result));    
-                }
-        
-    });
-    // return response with results
-    
-});
+
 
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
